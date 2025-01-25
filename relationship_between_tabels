@@ -1,0 +1,28 @@
+# Solution Relationship: b
+
+products to category: One-to-Many
+Each product belongs to a single category, while each category can have multiple products.
+FK (category_id) REFERENCES category(category_id)
+#-------------------
+
+products to nutritions: One-to-Many
+Each product can have one or more nutritional values.
+FK (product_id) REFERENCES products(product_id)
+#------------------------
+
+orders to products_orders: One-to-Many
+Each order can contain multiple rows in the products_orders table, where each row represents a single product in the order.
+FK (order_id) REFERENCES orders(order_id)
+#------------------------
+
+products to products_orders: One-to-Many
+Each product can appear in multiple rows in the products_orders table, representing different orders that include the product.
+FK (product_id) REFERENCES products(product_id)
+#------------------------
+
+orders to products (via products_orders): Many-to-Many
+Each order can include multiple products, and each product can be included in multiple orders.
+FK
+    PRIMARY KEY (order_id, product_id),
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
